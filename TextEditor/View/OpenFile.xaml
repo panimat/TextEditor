@@ -1,0 +1,25 @@
+﻿<Window x:Class="TextEditor.OpenFile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextEditor"
+        mc:Ignorable="d"
+        Title="OpenFile" Height="336" Width="594.88">
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" CanUserAddRows="false" x:Name="filesGrid">
+            <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding Size}" Header="Size" Width="70"/>
+                    <DataGridTextColumn Binding="{Binding DateCreate}" Header="Date create" Width="100"/>
+                    <DataGridTextColumn Binding="{Binding DateChange}" Header="Date change" Width="100"/>
+                </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btOpenFile" Content="Open" HorizontalAlignment="Left" Margin="31,275,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" Click="BtOpenFile_Click"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="121,275,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" Click="BtCancel_Click"/>
+    </Grid>
+</Window>

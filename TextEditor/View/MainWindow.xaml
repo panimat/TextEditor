@@ -1,0 +1,88 @@
+﻿<Window x:Class="TextEditor.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:local="clr-namespace:TextEditor"
+        mc:Ignorable="d"
+        Title="Text Editor" Height="450" Width="800">
+    <Grid>
+        <ToolBar x:Name="toolBar" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="783" HorizontalContentAlignment="Stretch" UseLayoutRounding="False">
+            <ToolBar.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ToolBar.LayoutTransform>
+            <Button x:Name="btnOpen" VerticalAlignment="Top" Width="20" Height="19" Click="BtnOpen_Click" Padding="0" Tag="" ToolTip="Open from DB">
+                <Image Source="../Resources/open.png" Width="20" Height="19" />
+            </Button>
+            <Button x:Name="btnSave" Height="19" VerticalAlignment="Top" Width="20" Margin="0,0,2,0" Padding="0" Click="BtnSave_Click" ToolTip="Save To DB">
+                <Image Source="../Resources/save.jpeg" Width="20" Height="19" />
+            </Button>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <Button x:Name="btnUndo" VerticalAlignment="Stretch" Width="20" Padding="0" Click="BtnUndo_Click" ToolTip="Undo">
+                <Image Source="../Resources/undo.png" Width="20" Height="19" />
+            </Button>
+            <Button x:Name="btnRedo" VerticalAlignment="Bottom" Width="20" Height="19" Padding="0" Click="BtnRedo_Click" ToolTip="Redo">
+                <Image Source="../Resources/redo.png" Width="17" Height="19" />
+            </Button>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <ToggleButton x:Name="btnBold" Command="EditingCommands.ToggleBold" Height="19" VerticalAlignment="Top" Width="20" Margin="2,0,0,0" Padding="0" ToolTip="Bold">
+                <Image Source="../Resources/bold.png" Width="16" Height="19" />
+            </ToggleButton>
+            <ToggleButton x:Name="btnItalics" Command="EditingCommands.ToggleItalic" Height="19" VerticalAlignment="Top" Width="20" Padding="0" ToolTip="Italics">
+                <Image Source="../Resources/italics.jpg" Width="16" Height="19" />
+            </ToggleButton>
+            <ToggleButton x:Name="btnUnderline" Command="EditingCommands.ToggleUnderline" Height="19" VerticalAlignment="Top" Width="20" Margin="0,0,2,0" Padding="0" ToolTip="Underline">
+                <Image Source="../Resources/underline.png" Width="20" Height="19" />
+            </ToggleButton>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <Button x:Name="btnLeftAlignment" VerticalAlignment="Top" Width="20" Height="19" Padding="0" Click="BtnLeftAlignment_Click">
+                <Image Source="../Resources/align_left.png" Width="20" Height="19" />
+            </Button>
+            <Button x:Name="btnRightAlignment" VerticalAlignment="Top" Width="20" Height="19" Padding="0" Click="BtnRightAlignment_Click">
+                <Image Source="../Resources/align_right.png" Width="20" Height="19" />
+            </Button>
+            <Button x:Name="btnCenterAlignment" VerticalAlignment="Top" Width="20" Height="19" Padding="0" Click="BtnCenterAlignment_Click">
+                <Image Source="../Resources/alignment_center.png" Width="20" Height="19" />
+            </Button>
+            <Button x:Name="btnWidthAlignment" VerticalAlignment="Bottom" Width="20" Height="19" Padding="0" Click="BtnWidthAlignment_Click">
+                <Image Source="../Resources/alignment_width.png" Width="17" Height="19" />
+            </Button>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <ComboBox x:Name="cbFontStyle" Height="19" Margin="2,0" VerticalAlignment="Top" Width="120" ToolTip="Font Family" SelectionChanged="CbFontStyle_SelectionChanged"/>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <ComboBox x:Name="cbFontSize" Height="19" Margin="0" VerticalAlignment="Top" Width="52" Padding="2,0" IsEditable="True" TextBoxBase.TextChanged="CbFontSize_TextChanged"/>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <Button x:Name="btnTextClrChng" VerticalAlignment="Top" Width="20" Height="19" Padding="0" Margin="2,0,0,0" Click="BtnTextClrChng_Click">
+                <Image Source="../Resources/textChange.png" Width="20" Height="19" />
+            </Button>
+            <Button x:Name="btnBckgrClrChng" VerticalAlignment="Bottom" Width="20" Height="19" Padding="0" Click="BtnBckgrClrChng_Click">
+                <Image Source="../Resources/changeColor.jpg" Width="17" Height="19" />
+            </Button>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <ComboBox x:Name="cbLineHeight" Height="19" Margin="0" VerticalAlignment="Top" Width="52" Padding="2,0" IsEditable="True" TextBoxBase.TextChanged="CbLineHeight_TextChanged"/>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <CheckBox x:Name="checkBox" Content="Autosave" Height="19" VerticalAlignment="Top" Margin="2,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+            <Button x:Name="btnSaveToFile" VerticalAlignment="Top" Width="20" Height="19" Padding="0" Margin="2,0,0,0" Click="BtnSaveToFile_Click" ToolTip="Save to file">
+                <Image Source="../Resources/saveToFile.png" Width="20" Height="19" ToolTip="Save To File" />
+            </Button>
+            <Button x:Name="btnOpenFromFile" VerticalAlignment="Bottom" Width="20" Height="19" Padding="0" Click="BtnOpenFromFile_Click" ToolTip="Open from file">
+                <Image Source="../Resources/openFromFile.jpg" Width="17" Height="19" />
+            </Button>
+            <Separator Height="19" Margin="0" VerticalAlignment="Top" Width="2" Background="#FF7C7C7C"/>
+        </ToolBar>
+        <RichTextBox x:Name="rtbTextEditor" Block.LineHeight="1" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" SelectionChanged="RtbTextEditor_SelectionChanged" BorderBrush="{x:Null}" SelectionBrush="#FF6695F9">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</Window>
